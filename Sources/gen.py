@@ -28,7 +28,7 @@ for username in sys.argv[1:]:
 		else:
 			return False
 
-	lower = 1
+	lower = 0
 	for upper in ([2**x for x in range(1000)]):
 		if not presence(upper):
 			break
@@ -41,6 +41,15 @@ for username in sys.argv[1:]:
 		else:
 			upper = mid
 
-	if not (is_error and upper == 1):
-		for i in range(1, upper + 1):
-			print(f"user:{username}+{i}")
+	if not is_error:
+		if upper > 0:
+			print(f"user:{username}")
+			print(f"userfix2:{username}")
+			for i in range(1, upper + 1):
+				print(f"user:{username}+{i}")
+				print(f"userfix2:{username}+{i}")
+		else:
+			# If they have no posts, this is the only thing we need, as user: is for getting resources now
+			print(f"userfix2:{username}")
+	else:
+		assert(upper == 0)
